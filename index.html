@@ -10244,6 +10244,33 @@
         windowHeight()
     </script>
     <script>
+        // Set countdown duration: 1h 30m = 90 minutes = 5400 seconds
+        let remainingSeconds = 90 * 60;
+      
+        const hourEl = document.querySelector('.countdown-item-hour div');
+        const minuteEl = document.querySelector('.countdown-item-minute div');
+        const secondEl = document.querySelector('.countdown-item-second div');
+      
+        function updateCountdown() {
+          const hours = Math.floor(remainingSeconds / 3600);
+          const minutes = Math.floor((remainingSeconds % 3600) / 60);
+          const seconds = remainingSeconds % 60;
+      
+          hourEl.textContent = String(hours).padStart(2, '0');
+          minuteEl.textContent = String(minutes).padStart(2, '0');
+          secondEl.textContent = String(seconds).padStart(2, '0');
+      
+          if (remainingSeconds > 0) {
+            remainingSeconds--;
+          } else {
+            clearInterval(timerInterval);
+          }
+        }
+      
+        updateCountdown(); // Update immediately
+        const timerInterval = setInterval(updateCountdown, 1000);
+      </script>
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Google Apps Script URL
             const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbwQRrIx9XdD7Py_JcES0-QCD-yCMpDCsKLm9Cf64_uH7gu6KGIaiaeNQs3mAM6rAslN/exec';
